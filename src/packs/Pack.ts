@@ -1,6 +1,7 @@
-import { TaskConfig, TaskConfigData } from './TaskConfig';
-import { UserspaceConfig, UserspaceConfigData } from './UserspaceConfig';
-import { VMConfigData, VMConfiguration } from './VMConfig'; 
+import { TaskConfig, type TaskConfigData } from './TaskConfig';
+import { UserspaceConfig, type UserspaceConfigData }
+  from './UserspaceConfig';
+import { type VMConfigData, VMConfiguration } from './VMConfig'; 
 
 
 export type TaskConstructorArgs = {
