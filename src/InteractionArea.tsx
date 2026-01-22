@@ -1,5 +1,5 @@
 import type { VMConfigData } from "./packs/VMConfig"
-import { VMTabBar, VMTabContainer } from './VMTab';
+import { VMTabContainer } from './VMTab';
 
 /**
   * InteractionAreaData
@@ -20,7 +20,7 @@ export type InteractionAreaData = {
   * as part of solving the 
   *
   */
-export const InteractionArea = (props: InteractionAreaData) => {
+export const InteractionArea = (_props: InteractionAreaData) => {
 
   // const vms = props.vms;
 

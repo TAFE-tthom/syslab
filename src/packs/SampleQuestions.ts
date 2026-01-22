@@ -1,13 +1,13 @@
 import type { VMConfigData } from "./VMConfig";
 
-const question1 =`
-## Git Activity 1 - Clone, Change and Push
+// const question1 =`
+// ## Git Activity 1 - Clone, Change and Push
 
-Within this activity we are going to through a typical activity of cloning a repository, making some changes and pushing it back to the original repository.
+// Within this activity we are going to through a typical activity of cloning a repository, making some changes and pushing it back to the original repository.
 
-1. Clone from root@gitworkshop:/srv/workship
+// 1. Clone from root@gitworkshop:/srv/workship
 
-`;
+// `;
 
 
 const fsquestion1 = `
@@ -27,13 +27,13 @@ When you are finished, run \`taskeval\` or click **check**.
 
 `;
 
-const cheatsheet = `
-## Terminal Playground
+// const cheatsheet = `
+// ## Terminal Playground
 
-This is a terminal playground for anyone to learn command line and linux.
+// This is a terminal playground for anyone to learn command line and linux.
 
 
-`;
+// `;
 
 const question2 =`
 ## Git Activity 2 - Init, Remote, Change and Push

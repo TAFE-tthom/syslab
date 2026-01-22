@@ -6,7 +6,7 @@ export type SysLabConsoleData = {
   
 }
 
-export const SysLabConsole = (props: SysLabConsoleData) => {
+export const SysLabConsole = (_props: SysLabConsoleData) => {
   
   const [vmctx, _setVMContext] = useState({
     emulator: null,
