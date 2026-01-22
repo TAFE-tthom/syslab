@@ -60,7 +60,7 @@ export const V86Load = (props: VMContext) => {
 
   // Used for the output on display and/or console
   const context = props;
-  const databuffers = props.datamap;
+  // const databuffers = props.datamap;
   const screen_container = props.datamap.canvas;
   const serialData = props.datamap.serialmap;
   
@@ -73,6 +73,7 @@ export const V86Load = (props: VMContext) => {
   //TODO: You should try set the VGA and Memory size to something reasonable
   // Emulator for x86  
   const emulator = new V86({
+        uart1: true,
         wasm_path: "/wasm/v86.wasm",
         memory_size: 512 * 1024 * 1024,
         vga_memory_size: 8 * 1024 * 1024,
@@ -89,8 +90,15 @@ export const V86Load = (props: VMContext) => {
 
         //TODO: Use the initial state, should be usable with v86 tools
         initial_state: { url: initialstateUrl },
-
+        net_device: {
+            relay_url: "wisp://localhost:8000",
+            type: "virtio"
+        },
         
+    });
+  emulator.bus.register("serial1-output-byte", (byte: number) => {
+      console.log(Uint8Array.of(byte));
+      
     });
   if(serialData.enabled) {
     console.log("Enabled");
@@ -106,8 +114,6 @@ export const V86Load = (props: VMContext) => {
       
   }
   context.emulator = emulator;
-  console.log(serialData);
-  console.log(context);
   const term = context.serial.terminal;
   if(term) {
     term.onData((data: any) => {
@@ -139,9 +145,7 @@ export const VMConsoleContainer = (props: VMProps) => {
     if(context) {
       const ctx = context;
       const emulator = V86Load(ctx);
-      
       props.context.emulator = emulator;
-      
     }
   }, [props])
 

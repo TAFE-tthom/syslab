@@ -5,7 +5,7 @@ import {
   MessageProtocol,
   PORT,
   TCPProtocol
-} from './Protocol.ts';
+} from './Protocol';
 
 const HOST = 'localhost';
 

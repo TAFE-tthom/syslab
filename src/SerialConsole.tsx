@@ -1,6 +1,9 @@
-import { Terminal } from "@xterm/xterm"
-import { useEffect, useRef } from "react"
 
+import { Terminal } from "@xterm/xterm";
+import { FitAddon } from "@xterm/addon-fit";
+import { useEffect, useRef, useState } from "react"
+
+import style from './styles/SysLabConsole.module.css';
 import "@xterm/xterm/css/xterm.css";
 
 /**
@@ -16,7 +19,6 @@ export type SerialConsoleContext = {
  * Should have a ref to the context and update capabilities
  */
 export type SerialConsoleProps = {
-  
   context: SerialConsoleContext
   updateContext: (term: Terminal) => void
 }
@@ -29,25 +31,29 @@ export type SerialConsoleProps = {
  */
 export const SerialConsole = (props: SerialConsoleProps) => {
 
+  const [fitAddon, _setFitAddon] = useState(new FitAddon());
   const consoleRef = useRef(null);
   const context = props.context;
 
+
   useEffect(() => {
+
     const conref = consoleRef.current;
 
     if(conref) {
       const term = new Terminal();
+      term.loadAddon(fitAddon);
 
-      
       context.terminal = term;
+      
       term.open(conref);
-      term.write("==\n\r");
+      fitAddon.fit();
     }
   }, [props]);
   
 
   return (
-    <div ref={consoleRef} id={"terminal"}>
+    <div ref={consoleRef} id={"terminal"} className={style.syslabConsole}>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import {
   MessageFn,
   PORT,
   TaskEvaluateResults
-} from './Protocol.ts';
+} from './Protocol';
 
 
 const ServerData = {
@@ -180,7 +180,6 @@ const MessageHandlers = (() => {
             results
           },
           hostWebSocket);
-        
       }
     }],
     [MessageProtocol.TaskLoad, (data: any) => {
@@ -259,7 +258,10 @@ const TCPServerSocketInitialisation = () => {
 
 
 const server = TCPServerSocketInitialisation();
+console.log("Starting up the server");
 server.listen(PORT, () => {
   console.log("VMRat - TCP Server has started and waiting for messages");
 });
+
+
 
