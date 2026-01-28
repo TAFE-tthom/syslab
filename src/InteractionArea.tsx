@@ -1,4 +1,4 @@
-import type { VMConfigData } from "./packs/VMConfig"
+import type { VMConfigData } from "./objs/VMConfig"
 import { VMTabContainer } from './VMTab';
 
 /**
@@ -20,13 +20,17 @@ export type InteractionAreaData = {
   * as part of solving the 
   *
   */
-export const InteractionArea = (_props: InteractionAreaData) => {
+export const InteractionArea = (props: InteractionAreaData) => {
 
   // const vms = props.vms;
 
-  // return (<div className={"interaction_area"} >
-  //     <VMTabBar vms={vms}/>
-  //   </div>)
+  const vmsRender = props.vms.map((e, idx) => {
+    return (<VMTabContainer key={`vmt-${idx}`} name={`vm-${idx}`}/>)
+  })
 
-  return <VMTabContainer name={"vm-1"}/>
+  return (<div className={"interaction_area"} >
+    {vmsRender}
+    </div>)
+
+  // return <VMTabontainer name={"vm-1"}/>
 }

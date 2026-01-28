@@ -4,6 +4,7 @@ import { SampleQuestionsData } from './packs/SampleQuestions';
 import { useState } from 'react';
 import style from "./styles/SysLabContext.module.css";
 import "./App.css";
+import { SysLabContainer } from './SysLabContainer';
 
 
 /**
@@ -36,16 +37,15 @@ import "./App.css";
 export const App = () => {
 
   const exercises = SampleQuestionsData;
-  const [currentQuestion, _setCurrentQuestion] = useState(0);
+  // const [currentQuestion, _setCurrentQuestion] = useState(0);
 
-  const questionData = exercises[currentQuestion];
-  const vmData = questionData.vms;
+  // const questionData = exercises[currentQuestion];
+  // const vmData = questionData.vms;
   
   return (
     <div className={style.syslabStack}>
       <SysLabTopBar />
-      <SysLabContext question={questionData.question}
-        vms={vmData}/>
+      <SysLabContainer exercises={exercises} />
     </div>
   )
 }

@@ -1,4 +1,5 @@
-import type { VMConfigData } from "./VMConfig";
+import type { QuestionData } from '../objs/QuestionData';
+import { VMConfiguration } from '../objs/VMConfig.ts'
 
 // const question1 =`
 // ## Git Activity 1 - Clone, Change and Push
@@ -11,7 +12,7 @@ import type { VMConfigData } from "./VMConfig";
 
 
 const fsquestion1 = `
-## Activity - Making folders and changing directories
+## SysLab - Test Activity
 
 As part of getting familiar with the filesystem and the command line, you will need to use the following commands.
 
@@ -23,7 +24,7 @@ As part of getting familiar with the filesystem and the command line, you will n
 
 For this, create a directory called **MyFolder**, make sure you then change your current directory to **MyFolder**.
 
-When you are finished, run \`taskeval\` or click **check**.
+- Feedback And Marking Panel will be introduced later -
 
 `;
 
@@ -35,42 +36,37 @@ When you are finished, run \`taskeval\` or click **check**.
 
 // `;
 
-const question2 =`
-## Git Activity 2 - Init, Remote, Change and Push
+// const question2 =`
+// ## Git Activity 2 - Init, Remote, Change and Push
 
-`;
+// `;
 
-const question3 =`
-## Question 3
+// const question3 =`
+// ## Question 3
 
-`;
+// `;
 
-export type QuestionData = {
-  name: string,
-  question: string,
-  vms: Array<VMConfigData>
-}
 
 export const SampleQuestionsData: Array<QuestionData> = [
   {
-    name: "File System - 1",
+    name: "Test Activity - 1",
     question: fsquestion1,
     vms: [
-      
+      VMConfiguration.DefaultConfig()
     ]
   },
-  {
-    name: "Git Activity - 2",
-    question: question2,
-    vms: [
+  // {
+  //   name: "Git Activity - 2",
+  //   question: question2,
+  //   vms: [
       
-    ]
-  },
-  {
-    name: "Git Activity - 3",
-    question: question3,
-    vms: [
+  //   ]
+  // },
+  // {
+  //   name: "Git Activity - 3",
+  //   question: question3,
+  //   vms: [
       
-    ]
-  }
+  //   ]
+  // }
 ];

@@ -48,6 +48,7 @@ export const SerialConsole = (props: SerialConsoleProps) => {
       
       term.open(conref);
       fitAddon.fit();
+      term.writeln("Press Enter To Prompt VM")
     }
   }, [props]);
   

@@ -58,9 +58,18 @@ export const VMTabContainer = (props: VMTabData) => {
     }
   } as VMContext)
 
+  const onCloseClick = () => {
+    console.log("Nothing happens yet");
+  }
+
   return (
     <>
-      <div className={style.vmTabTitle}>{name}</div>
+      <div className={style.vmTabObject}>
+      <div className={style.vmTabTitle}>
+        <span className={style.vmTitle}>{name}</span>
+        <span className={style.vmClose} onClick={onCloseClick}>✕</span>
+      </div>
+      </div>
       <VMConsoleContainer context={vmctx} />
     </>
   )

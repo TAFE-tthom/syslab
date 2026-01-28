@@ -12,6 +12,7 @@
   min-width: 350px;
   min-height: 300px;
   max-height: 450px;
+  border-right: 1px solid #1a1b26;
 }
 
 @media (max-width: 700px) {

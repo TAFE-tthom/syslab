@@ -1,6 +1,6 @@
 import { InteractionArea } from './InteractionArea';
 import { SysLabQuestion } from './SysLabQuestion';
-import type { VMConfigData } from './packs/VMConfig';
+import type { VMConfigData } from './objs/VMConfig';
 
 /**
   * SysLabContextData
@@ -25,7 +25,7 @@ export const SysLabContext = (props: SysLabContextData) => {
   return (
     <div className={"syslabcontext"}>
       <SysLabQuestion question={question} />
-      <InteractionArea vms={vms}/>
+      <InteractionArea vms={vms} />
     </div>
   )
 }

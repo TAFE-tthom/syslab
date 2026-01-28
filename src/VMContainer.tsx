@@ -1,6 +1,6 @@
 // @ts-ignore
 import { V86 } from './v86/libv86.mjs';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { SerialConsole, type SerialConsoleContext } from './SerialConsole'; 
 import { Terminal } from '@xterm/xterm';
 
@@ -66,36 +66,36 @@ export const V86Load = (props: VMContext) => {
   
 
   //TODO: Update this so it is configurable
-  const baseurl = "/alpine-rootfs-flat";
-  const basefs = "/alpine-fs.json";
-  const initialstateUrl = "./alpine-state.bin";
+  const baseurl = "alpine-rootfs-flat";
+  const basefs = "alpine-fs.json";
+  const initialstateUrl = "alpine-state.bin";
 
   //TODO: You should try set the VGA and Memory size to something reasonable
   // Emulator for x86  
   const emulator = new V86({
-        uart1: true,
-        wasm_path: "/wasm/v86.wasm",
-        memory_size: 512 * 1024 * 1024,
-        vga_memory_size: 8 * 1024 * 1024,
-        screen_container,
-        bios: { url: "/seabios.bin" },
-        vga_bios: { url: "/vgabios.bin" },
-        filesystem: {
-            baseurl,
-            basefs,
-        },
-        autostart: true,
-        bzimage_initrd_from_filesystem: true,
-        cmdline: "rw root=host9p rootfstype=9p rootflags=trans=virtio,cache=loose modules=virtio_pci tsc=reliable console=ttyS0,115200",
+    uart1: true,
+    wasm_path: "wasm/v86.wasm",
+    memory_size: 512 * 1024 * 1024,
+    vga_memory_size: 8 * 1024 * 1024,
+    screen_container,
+    bios: { url: "seabios.bin" },
+    vga_bios: { url: "vgabios.bin" },
+    filesystem: {
+        baseurl,
+        basefs,
+    },
+    autostart: true,
+    bzimage_initrd_from_filesystem: true,
+    cmdline: "rw root=host9p rootfstype=9p rootflags=trans=virtio,cache=loose modules=virtio_pci tsc=reliable console=ttyS0,115200",
 
-        //TODO: Use the initial state, should be usable with v86 tools
-        initial_state: { url: initialstateUrl },
-        net_device: {
-            relay_url: "wisp://localhost:8000",
-            type: "virtio"
-        },
-        
-    });
+    //TODO: Use the initial state, should be usable with v86 tools
+    initial_state: { url: initialstateUrl },
+    net_device: {
+        relay_url: "wisp://localhost:8000",
+        type: "virtio"
+    },
+      
+  });
   emulator.bus.register("serial1-output-byte", (byte: number) => {
       console.log(Uint8Array.of(byte));
       
@@ -139,9 +139,7 @@ export const VMConsoleContainer = (props: VMProps) => {
 
   useEffect(() => {
     
-    const context = props.context;
-    
-    
+    const context = props.context;    
     if(context) {
       const ctx = context;
       const emulator = V86Load(ctx);
@@ -161,33 +159,33 @@ export const VMConsoleContainer = (props: VMProps) => {
  * Creates a Virtual Machine Container
  * Will accept the VM Context 
  */
-export const VMCanvasContainer = (props: VMProps) => {
+// export const VMCanvasContainer = (props: VMProps) => {
 
-  const canvasRef = useRef(null);
+//   const canvasRef = useRef(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const context = props.context;
+//   useEffect(() => {
+//     const canvas = canvasRef.current;
+//     const context = props.context;
     
     
-    if(canvas) {
-      const ctx = context;
-      ctx.datamap.canvas = canvas;
-      const emulator = V86Load(ctx);
+//     if(canvas) {
+//       const ctx = context;
+//       ctx.datamap.canvas = canvas;
+//       const emulator = V86Load(ctx);
       
-      props.context.emulator = emulator;
+//       props.context.emulator = emulator;
       
-    }
-  }, [props]);
+//     }
+//   }, [props]);
   
-  return (
-  <>
-    <div ref={canvasRef} id="screen_container">
-      <div style={{whiteSpace: 'pre', font: "14px monospace", lineHeight: "14px"}}>
-      </div>
-      <canvas style={{display: "none"}}></canvas>
-    </div>
-  </>)
-}
+//   return (
+//   <>
+//     <div ref={canvasRef} id="screen_container">
+//       <div style={{whiteSpace: 'pre', font: "14px monospace", lineHeight: "14px"}}>
+//       </div>
+//       <canvas style={{display: "none"}}></canvas>
+//     </div>
+//   </>)
+// }
 
 
