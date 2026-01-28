@@ -24,7 +24,7 @@ export const InteractionArea = (props: InteractionAreaData) => {
 
   // const vms = props.vms;
 
-  const vmsRender = props.vms.map((e, idx) => {
+  const vmsRender = props.vms.map((_e, idx) => {
     return (<VMTabContainer key={`vmt-${idx}`} name={`vm-${idx}`}/>)
   })
 

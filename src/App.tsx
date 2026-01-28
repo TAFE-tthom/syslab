@@ -1,7 +1,5 @@
 import { SysLabTopBar } from './SysLabTopBar';
-import { SysLabContext } from './SysLabContext';
 import { SampleQuestionsData } from './packs/SampleQuestions';
-import { useState } from 'react';
 import style from "./styles/SysLabContext.module.css";
 import "./App.css";
 import { SysLabContainer } from './SysLabContainer';

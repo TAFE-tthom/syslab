@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { VMConfigData } from "./packs/VMConfig";
+import type { VMConfigData } from "./objs/VMConfig";
 import { VMConsoleContainer, type VMContext } from "./VMContainer";
 
 import style from './styles/VMTab.module.css';
