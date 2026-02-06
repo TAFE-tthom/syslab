@@ -38,7 +38,9 @@ export const SysLabQuestion = (props: SysLabQuestionData) => {
   </ReactMarkdown>);
   return (
     <div className={style.syslabQuestionView}>
+      <div className={style.syslabQuestionContainer}>
       {questionHTML}
+      </div>
     </div>
   )
 }

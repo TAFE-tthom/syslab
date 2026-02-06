@@ -1,8 +1,11 @@
 import { useState } from "react";
 import type { VMConfigData } from "./objs/VMConfig";
 import { VMConsoleContainer, type VMContext } from "./VMContainer";
+import { VMControlPanel } from "./VMControlPanel";
+import { SpectMessages, MonitorWriteObjectFactory } from 'vmspect/proto';
 
 import style from './styles/VMTab.module.css';
+import type { QuestionTests } from "./objs/QuestionData";
 
 /**
   * Holds a list of tabs of the vms;
@@ -39,18 +42,35 @@ export const VMTabBar = (props: VMTabBarData) => {
   */
 export type VMTabData = {
   name: string
-  // config: VMConfigData
+  config: VMConfigData
+  tests: QuestionTests
+  selected: number
 } 
 
+export type VMSharedData = {
+  resultUpdate: (data: any) => void
+}
+
+/**
+ * TabContainer
+ * 
+ */
 export const VMTabContainer = (props: VMTabData) => {
 
+  const selected = props.selected;
+  const tests = props.tests;
   const name = props.name;
-  const [vmctx, _setVMContext] = useState({
+  const [shared, _setSharedState] = useState<VMSharedData>({
+    resultUpdate: () => {}
+  })
+  const [vmctx, setVMContext] = useState({
     emulator: null,
+    monitor: null,
     serial: {
       terminal: null
     },
     datamap: {
+      statebuf: null,
       serialmap: { enabled: true },
       buffers: {
         combuffer: ''
@@ -58,19 +78,59 @@ export const VMTabContainer = (props: VMTabData) => {
     }
   } as VMContext)
 
+
   const onCloseClick = () => {
     console.log("Nothing happens yet");
+  };
+
+  const onCheckTrigger = () => {
+    const emulator = vmctx.emulator;
+    const monitor = vmctx.monitor;
+    const packet = SpectMessages.CheckPacket();
+
+    // TODO: Need to send a particular object over
+    if(monitor) {
+      monitor.write(packet, MonitorWriteObjectFactory(emulator));
+    }
+  };
+
+  const onSyncTrigger = () => {
+    const emulator = vmctx.emulator;
+    const monitor = vmctx.monitor;
+    const packet = SpectMessages.TaskPacket(tests);
+    
+    // TODO: Need to send a particular object over
+    if(monitor) {
+      monitor.write(packet, MonitorWriteObjectFactory(emulator));
+    }
   }
+
+  const onResetTrigger = () => {
+    const nctx = {...vmctx};
+    nctx.emulator = null;
+    nctx.serial.terminal = null;
+    setVMContext(nctx);
+  }
+
+  // const updateVMContext = (vm: VMContext) => {
+  //   setVMContext(vm);
+  // }
 
   return (
     <>
+      <VMControlPanel context={vmctx} checkTrigger={onCheckTrigger}
+        resetTrigger={onResetTrigger} syncTrigger={onSyncTrigger}
+        shared={shared}
+        tests={tests}
+        selected={selected}/>
       <div className={style.vmTabObject}>
       <div className={style.vmTabTitle}>
         <span className={style.vmTitle}>{name}</span>
         <span className={style.vmClose} onClick={onCloseClick}>✕</span>
       </div>
       </div>
-      <VMConsoleContainer context={vmctx} />
+      <VMConsoleContainer context={vmctx} tests={tests} shared={shared}
+        selected={selected} />
     </>
   )
 

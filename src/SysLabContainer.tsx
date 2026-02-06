@@ -10,7 +10,11 @@ export type SysLabPanelData = {
   updateSelected: (n: number) => void
 }
 
-
+/**
+ * SysLabPanel
+ * Contains a list of exercises that the user can select
+ * and move to
+ */
 export const SysLabPanel = (props: SysLabPanelData) => {
 
   const selected = props.selected;
@@ -26,7 +30,7 @@ export const SysLabPanel = (props: SysLabPanelData) => {
     
     return (
       
-      <li className={styleSelected} onClick={
+      <li className={styleSelected} key={`lpan-${idx}`}onClick={
         () => { updateTrigger(idx) }}>
         {name}
       </li>
@@ -41,7 +45,10 @@ export const SysLabPanel = (props: SysLabPanelData) => {
   
 }
 
-
+/**
+ * ContainerData
+ * Contains a list of exercises
+ */
 export type SysLabContainerData = {
   exercises: Array<QuestionData>
 }
@@ -49,19 +56,22 @@ export type SysLabContainerData = {
 /**
  * Will contain exercise context and 
  */
-export const SysLabContainer = (props: SysLabContainerData) => {
+export const SysLabContainer =
+  (props: SysLabContainerData) => {
 
-  const [selected, setSelected] = useState(0);
+  const [ selected, setSelected ] = useState(0);
   const exercises = props.exercises;
   const questionData = exercises[selected];
-
 
   return (
     <div className={style.syslabContainer}>
       <SysLabPanel exercises={exercises} selected={selected}
         updateSelected={setSelected} />
       <SysLabContext question={questionData.question}
-          vms={questionData.vms} />
+          vms={questionData.vms}
+          tests={questionData.tests}
+          selected={selected}
+        />
     </div>
   )
   

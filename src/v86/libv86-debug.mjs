@@ -631,6 +631,7 @@ $SyncBuffer$$module$src$buffer$$.prototype.get_state = function() {
   return $state$$;
 };
 $SyncBuffer$$module$src$buffer$$.prototype.set_state = function($state$jscomp$1$$) {
+  console.log(this.buffer);
   this.byteLength = $state$jscomp$1$$[0];
   this.buffer = $state$jscomp$1$$[1].slice().buffer;
 };
@@ -4310,7 +4311,8 @@ function $MouseAdapter$$module$src$browser$mouse$$($bus$jscomp$11$$, $screen_con
     "undefined" !== typeof window && (window.removeEventListener("touchstart", $touch_start_handler$$, !1), window.removeEventListener("touchend", $touch_end_handler$$, !1), window.removeEventListener("touchmove", $mousemove_handler$$, !1), window.removeEventListener("mousemove", $mousemove_handler$$, !1), window.removeEventListener("mousedown", $mousedown_handler$$, !1), window.removeEventListener("mouseup", $mouseup_handler$$, !1), window.removeEventListener("wheel", $mousewheel_handler$$, {passive:!1}));
   };
   this.init = function() {
-    "undefined" !== typeof window && (this.destroy(), window.addEventListener("touchstart", $touch_start_handler$$, !1), window.addEventListener("touchend", $touch_end_handler$$, !1), window.addEventListener("touchmove", $mousemove_handler$$, !1), window.addEventListener("mousemove", $mousemove_handler$$, !1), window.addEventListener("mousedown", $mousedown_handler$$, !1), window.addEventListener("mouseup", $mouseup_handler$$, !1), window.addEventListener("wheel", $mousewheel_handler$$, {passive:!1}));
+    "undefined" !== typeof window && (this.destroy(), window.addEventListener("touchstart", $touch_start_handler$$, !1), window.addEventListener("touchend", $touch_end_handler$$, !1), window.addEventListener("touchmove", $mousemove_handler$$, !1), window.addEventListener("mousemove", $mousemove_handler$$, !1), window.addEventListener("mousedown", $mousedown_handler$$, !1))
+
   };
   this.init();
 }

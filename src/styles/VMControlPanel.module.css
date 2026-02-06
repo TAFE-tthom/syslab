@@ -1,0 +1,128 @@
+.vmcontrolpanel {
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  background-color: #141520;
+  border: 1px solid #252945;
+  border-radius: 0;
+}
+
+
+.vmpanelButton {
+  background-color: #272834;
+  border: 1px solid #555975;
+  border-radius: 0;
+  margin-right: 3px;
+}
+
+.vmTests {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  z-index: 100000;
+  background-color: #1a1b26;
+  border: 1px solid #555975;
+  border-radius: 0;
+}
+
+.vmTestRow {
+  width: 100%;
+  margin-bottom: 1em;
+  border: 1px solid #555975;
+  border-radius: 0;
+  left: 1em;
+  right: 1em;
+}
+
+.vmpanelButtonPadded {
+  background-color: #272834;
+  border: 1px solid #555975;
+  border-radius: 0;
+  margin-right: 3px;
+  display: flex;
+  margin-right: auto;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.testsHeader {
+  background-color: #272834;
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #555975
+}
+
+.vmOutcomeName {
+  font-weight: 500;
+  font-style: bold;
+  display: inline-flex;
+  flex: 1;
+}
+
+.vmOutcomeResult {
+  font-weight: 500;
+  font-style: bold;
+  display: inline-flex;
+  margin-left: auto;
+  flex: 0.5;
+}
+
+
+.vmOutcomeNoEvent {
+
+  font-weight: 500;
+  font-style: bold;
+  display: inline-flex;
+  margin-left: auto;
+  flex: 0.5;
+}
+
+.vmOutcomePassed {
+
+  background-color: #32cd32;
+  font-weight: 500;
+  font-style: bold;
+  display: inline-flex;
+  margin-left: auto;
+  flex: 0.5;
+}
+
+.vmpanelTextState {
+  font-size: 18pt;
+  margin-right: auto;
+}
+
+.vmOutcomeFailed {
+
+  background-color: darkred;
+  font-weight: 500;
+  font-style: bold;
+  display: inline-flex;
+  margin-left: auto;
+  flex: 0.5;
+}
+
+.testNoEvent {
+  padding-left: 0.5em;
+  display: flex;
+  background-color: dimgray;
+  border: 1px solid #555975;
+  border-radius: 0;
+}
+
+.testOutcomeFail {
+  padding-left: 0.5em;
+  display: flex;
+  background-color: red;
+  border: 1px solid #555975;
+  border-radius: 0;
+}
+
+.testOutcomePass {
+  padding-left: 0.5em;
+  display: flex;
+  background-color: green;
+  border: 1px solid #555975;
+  border-radius: 0;
+}

@@ -1,6 +1,9 @@
 import { InteractionArea } from './InteractionArea';
 import { SysLabQuestion } from './SysLabQuestion';
 import type { VMConfigData } from './objs/VMConfig';
+import type { QuestionTests } from './objs/QuestionData';
+
+import style from './styles/SysLabContext.module.css';
 
 /**
   * SysLabContextData
@@ -9,6 +12,8 @@ import type { VMConfigData } from './objs/VMConfig';
 export type SysLabContextData = {
   question: string
   vms: Array<VMConfigData>
+  tests: QuestionTests
+  selected: number
 }
 
 
@@ -21,11 +26,13 @@ export const SysLabContext = (props: SysLabContextData) => {
     
   const vms = props.vms;
   const question = props.question;
+  const tests = props.tests;
+  const selected = props.selected;
 
   return (
-    <div className={"syslabcontext"}>
+    <div className={style.syslabcontext}>
       <SysLabQuestion question={question} />
-      <InteractionArea vms={vms} />
+      <InteractionArea vms={vms} tests={tests} selected={selected} />
     </div>
   )
 }

@@ -1,3 +1,4 @@
+import type { QuestionTests } from "./objs/QuestionData";
 import type { VMConfigData } from "./objs/VMConfig"
 import { VMTabContainer } from './VMTab';
 
@@ -7,7 +8,8 @@ import { VMTabContainer } from './VMTab';
   */
 export type InteractionAreaData = {
   vms: Array<VMConfigData>
-  
+  tests: QuestionTests
+  selected: number
 }
 
 
@@ -22,15 +24,17 @@ export type InteractionAreaData = {
   */
 export const InteractionArea = (props: InteractionAreaData) => {
 
+  const selected = props.selected;
   // const vms = props.vms;
 
-  const vmsRender = props.vms.map((_e, idx) => {
-    return (<VMTabContainer key={`vmt-${idx}`} name={`vm-${idx}`}/>)
+  const vmsRender = props.vms.map((e, idx) => {
+    return (<VMTabContainer key={`vmt-${idx}`}
+      name={`vm-${idx}`} config={e} tests={props.tests}
+      selected={selected}
+    />);
   })
 
   return (<div className={"interaction_area"} >
     {vmsRender}
     </div>)
-
-  // return <VMTabontainer name={"vm-1"}/>
 }

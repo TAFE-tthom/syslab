@@ -5,12 +5,12 @@
   "type": "module",
   "homepage": "https://tafe-tthom.github.io/syslab/",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "predeploy" : "npm run build",
+    "predeploy": "npm run build",
     "preview": "vite preview",
-    "deploy" : "gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@xterm/addon-fit": "^0.11.0",
@@ -21,7 +21,8 @@
     "react-dom": "^19.2.0",
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
-    "vite-plugin-markdown": "^2.2.0"
+    "vite-plugin-markdown": "^2.2.0",
+    "vmspect": "file:../vmspect"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

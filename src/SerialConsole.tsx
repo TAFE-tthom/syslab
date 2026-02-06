@@ -1,7 +1,7 @@
 
 import { Terminal } from "@xterm/xterm";
 import { FitAddon } from "@xterm/addon-fit";
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 import style from './styles/SysLabConsole.module.css';
 import "@xterm/xterm/css/xterm.css";
@@ -31,8 +31,9 @@ export type SerialConsoleProps = {
  */
 export const SerialConsole = (props: SerialConsoleProps) => {
 
-  const [fitAddon, _setFitAddon] = useState(new FitAddon());
-  const consoleRef = useRef(null);
+  // const [fitAddon, _setFitAddon] = useState(new FitAddon());
+  const termRef = useRef(new Terminal());
+  const consoleRef = useRef<HTMLDivElement>(null);
   const context = props.context;
 
 
@@ -41,14 +42,21 @@ export const SerialConsole = (props: SerialConsoleProps) => {
     const conref = consoleRef.current;
 
     if(conref) {
-      const term = new Terminal();
-      term.loadAddon(fitAddon);
 
-      context.terminal = term;
-      
-      term.open(conref);
-      fitAddon.fit();
-      term.writeln("Press Enter To Prompt VM")
+      if(!context.terminal) {
+        const terminal = termRef.current;
+        const fitAddon = new FitAddon();
+        context.terminal = terminal;
+        
+        terminal.loadAddon(fitAddon);
+        terminal.open(conref)
+        
+        fitAddon.fit();
+      } else {
+        termRef.current.reset();
+        termRef.current.refresh(0, 40);
+      }
+    } else {
     }
   }, [props]);
   

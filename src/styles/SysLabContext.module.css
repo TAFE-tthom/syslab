@@ -1,9 +1,10 @@
-.syslab_context {
+.syslabcontext {
   display: flex;
   height: 100%;
   flex-direction: column;
   flex: 4;
   min-width: 350px;
+  overflow: scroll;
 }
 
 .syslabTopBar {
