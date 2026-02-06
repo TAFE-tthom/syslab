@@ -108,11 +108,16 @@ export type V86DataMap = {
 }
 
 // Hold onto an existing object rather than a new one?
-export const V86StateReader = async (url: string, dmap: V86DataMap) => {
+export const V86StateReader = async (url: string, context: VMContext) => {
 
-  const datamap = dmap;
+  
+  const datamap = context.datamap;
+  const term = context.serial.terminal;
+  term?.write("Setting up System");
   
   if(datamap.statebuf === null) {
+    
+    term?.write("... Retrieving Image.");
     const decompStream = new DecompressionStream("gzip");
     const stateBlob = new Uint8Array(await (await fetch(url)).arrayBuffer());
 
@@ -132,7 +137,6 @@ export const V86StateReader = async (url: string, dmap: V86DataMap) => {
       if(dataResult.value) {
         dataDump.push(...dataResult.value);
       }
-      
       done = dataResult.done;            
     }
 
@@ -168,10 +172,11 @@ export const V86Load = async (props: VMContext) => {
     // NOTE: Investigate this matter later on
     await props.emulator.restore_state(props.datamap.statebuf); //LIKE LOL WHAT? Why does this fix it?
     await props.emulator.run();
+    props.serial.terminal!.writeln("VM Ready");
     return props.emulator;
   } else {
     
-    let stateData = await V86StateReader(initialstateUrl, context.datamap);
+    let stateData = await V86StateReader(initialstateUrl, context);
   
     // const databuffers = props.datamap;
     const serialData = props.datamap.serialmap;
@@ -225,6 +230,12 @@ export const V86Load = async (props: VMContext) => {
         return;
       });
     }
+
+    emulator.add_listener("emulator-ready", async function() {
+      if(term) {
+        term.writeln("\r\nVM Ready");
+      }
+    })
 
   
     return emulator;
